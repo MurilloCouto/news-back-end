@@ -7,7 +7,7 @@
     }
   ],
   "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/src/server.js" }
+    { "src": "/login", "methods": ["OPTIONS"], "dest": "src/server.js" },
+    { "src": "/(.*)", "dest": "src/server.js" }
   ]
 }
