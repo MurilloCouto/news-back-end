@@ -6,10 +6,11 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [{ "src": "/(.*)", "dest": "src/server.js" }],
-  "rewrites": [
-    { "source": "/login", "destination": "/src/server.js" },
-    { "source": "/register", "destination": "/src/server.js" },
-    { "source": "/(.*)", "destination": "/src/server.js" }
+  "routes": [
+    { "src": "/login", "dest": "src/server.js" },
+    { "src": "/register", "dest": "src/server.js" },
+    { "src": "/news", "dest": "src/server.js" },
+    { "src": "/user", "dest": "src/server.js" },
+    { "src": "/(.*)", "dest": "src/server.js" }
   ]
 }
