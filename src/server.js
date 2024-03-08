@@ -10,10 +10,15 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.options("*", cors());
+app.use((err, req, res, next) => {
+  console.error("Erro global:", err);
+  return res.status(500).json({ message: "Erro interno do servidor." });
+});
 
 const PORT = process.env.PORT || 8080;
 
 app.post("/login", async (req, res) => {
+  console.log("Entrou na rota /login");
   if (!req.body.email) {
     return res.status(400).json({ message: "O campo 'e-mail' é obrigatório." });
   }
@@ -43,12 +48,14 @@ app.post("/login", async (req, res) => {
 });
 
 app.get("/user", async (_, res) => {
+  console.log("chamou rota /user");
   const users = await UserModel.find({});
 
   return res.status(200).json(users);
 });
 
 app.post("/user", async (req, res) => {
+  console.log("inputou rota /user");
   try {
     if (!req.body.name) {
       return res.status(400).json({ message: "O campo 'nome' é obrigatório." });
@@ -91,6 +98,7 @@ app.post("/user", async (req, res) => {
 });
 
 app.get("/news", async (req, res) => {
+  console.log("chamou rota /news");
   let filterCategory = {};
   if (req.query.category) {
     filterCategory = { category: req.query.category };
@@ -100,6 +108,7 @@ app.get("/news", async (req, res) => {
 });
 
 app.post("/news", async (req, res) => {
+  console.log("inputou rota /news");
   try {
     if (!req.body.title) {
       return res
